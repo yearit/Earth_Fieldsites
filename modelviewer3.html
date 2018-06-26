@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>3D Viewer</title>
+    <link rel="stylesheet" type="text/css" href="/js/jquery-ui-1.11.1/jquery-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/paint.css" />
+    <link rel="stylesheet" type="text/css" href="/css/modelviewer.css">
+
+    <!--
+    <script type="text/javascript" src="js/es5-shim.js"></script>
+    <script type="text/javascript" src="js/es6-shim.js"></script>
+    <script type="text/javascript" src="js/bluebird.js"></script>
+    <script type="text/javascript" src="js/hammer.js"></script>
+    <script type="text/javascript" src="js/dat.gui.js"></script>
+    <script type="text/javascript" src="js/OSG.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src='js/spectrum.js'></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script src="js/mouseModel.js"></script>
+    <script src="js/pointListModel.js"></script>
+    <script src="js/shapeModel.js"></script>
+    <script src="js/toolModel.js"></script>
+    <script src="js/toolContainerModel.js"></script>
+    <script src="js/tool.js"></script>
+    <script src="js/canvasModel.js"></script>
+    <script src="js/canvas.js"></script>
+    -->
+    <script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src='/js/thirdparty.js'></script>
+    <script type="text/javascript" src="/js/OSG.min.js"></script>
+    <script type="text/javascript" src="/js/viewer3.js"></script>
+    <script type="text/javascript" src="/js/paint.js"></script>
+    <script type="text/javascript" src="/js/mvhelper.js"></script>
+</head>
+
+<body class="osgjs-theme-dark">
+    <div id="viewer3d">
+        <div id="ViewContainer" class="osgjs-fullpage">
+            <canvas id="View" style="height:100%;width:100%;" oncontextmenu="return false;"></canvas>
+        </div>
+
+        <div class="toolbar">
+            <img class="tb-btn" src="/images/paint-icon.png" title="Click to snapshot and edit" onclick="startEdit()">
+            <img class="tb-btn" src="/images/ruler-icon.png" title="Click to start measuring" onclick="measure()">
+        </div>
+        <div class="osgjs-info osgjs-info-dark">
+            <div id="meas"></div>
+        </div>
+    </div>
+
+    <div id="painter">
+        <div class="row-fluid main-wrap">
+            <div class="span12 canvas-wrap">
+                <canvas id="canvas-background" class="canvas-paint canvas-background"></canvas>
+                <canvas class="canvas-paint canvas-negative"></canvas>
+                <canvas id="canvas-layer" class="canvas-paint canvas-layer"></canvas>
+                <canvas class="canvas-paint canvas-buffer"></canvas>
+                <canvas id="canvas-mouse" class="canvas-paint canvas-mouse"></canvas>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <img class="tb-btn" src="/images/screenshot.png" title="Click to save current image" onclick="saveImage()">
+            <img class="tb-btn" src="/images/go-back-icon.png" title="Click to go back to 3D view" onclick="backTo3D()">
+        </div>
+        <div id="tool-wrap" class="tool-wrap">
+            <div class="tool">
+                <button class="shape active" title="Draw Lines" data-current-tool="Line" data-tool-panel="shape"></button>
+                <button class="stroke" title="Freeform" data-current-tool="Pen" data-tool-panel="stroke"></button>
+                <button class="eraser" title="Eraser" data-current-tool="Eraser" data-tool-panel="eraser"></button>
+                <button class="text" title="Text" data-tool-panel="text" data-current-tool="Text"></button>
+            </div>
+            <div class="tool-panel">
+                <div class="shape wrap">
+                    <button class="line" title="Line" data-tool="shape" data-tool-class="Line"></button>
+                    <button class="curve-closed" title="Closed curve" data-tool="shape" data-tool-class="CurveClosed"></button>
+                    <button class="rect" title="Rectangle" data-tool="shape" data-tool-class="Rect"></button>
+                    <button class="circle" title="Circle" data-tool="shape" data-tool-class="Circle"></button>
+                    <button class="ellipse" title="Ellipse" data-tool="shape" data-tool-class="Ellipse"></button>
+                </div>
+                <div class="stroke wrap">
+                    <button class="pen" title="Pen" data-tool="stroke" data-tool-class="Pen"> </button>
+                    <button class="curve-closed-stroke" title="Closed curve" data-tool="stroke" data-tool-class="CurveClosedStroke"></button>
+                    <button class="rect-stroke" title="Rectangle" data-tool="stroke" data-tool-class="RectStroke"> </button>
+                    <button class="circle-stroke" title="Circle" data-tool="stroke" data-tool-class="CircleStroke"></button>
+                    <button class="ellipse-stroke" title="Ellipse" data-tool="stroke" data-tool-class="EllipseStroke"></button>
+                </div>
+                <div class="eraser wrap">
+                </div>
+                <div class="text wrap">
+                    <button class="text" title="Text" data-tool="text" data-tool-class="Text"> </button>
+                    <button class="text-stroke" title="Stroked Text" data-tool="text" data-tool-class="TextStroke"> </button>
+                </div>
+            </div>
+        </div>
+        <footer />
+    </div>
+</body>
+</html>
+

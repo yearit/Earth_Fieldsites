@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>3D Viewer</title>
+    <link rel="stylesheet" href="/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="/css/modelviewer.css">
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
+    <script src="/js/thirdparty.js"></script>
+    <script src="/js/dat.gui.min.js"></script>
+    <script src="/js/modelviewer2.js"></script>
+</head>
+
+<body class="osgjs-theme-dark">
+    <div id="container1">
+        <div id="col1">
+            <canvas id="View1" style="height:100%;width:100%;" oncontextmenu="return false;"></canvas>
+        </div>
+        <div id="col2">
+            <canvas id="View2" style="height:100%;width:100%;" oncontextmenu="return false;"></canvas>
+        </div>
+    </div>
+    <input type="checkbox" id="lockBtn"><label for="lockBtn" style="position:fixed;left:44%">Lock Views</label>
+    <script>
+        $("#lockBtn").button({ icons: {primary: "ui-icon-link"} }).click(toggleViewerLock).prop('checked', false);
+    </script>
+</body>
+</html>
+

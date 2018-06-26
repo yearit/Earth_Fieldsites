@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>3D Viewer</title>
+    <link rel="stylesheet" href="/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="/css/paint.css">
+    <link rel="stylesheet" href="/css/modelviewer.css">
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
+    <script src="/js/thirdparty.js"></script>
+    <script src="/js/dat.gui.min.js"></script>
+    <script src="/js/paint.js"></script>
+    <script src="/js/modelviewer.js"></script>
+</head>
+
+<body class="osgjs-theme-dark">
+    <div id="viewer3d">
+        <div id="ViewContainer" class="osgjs-fullpage">
+            <canvas id="View" style="height:100%;width:100%;" oncontextmenu="return false;"></canvas>
+        </div>
+
+        <div class="toolbar">
+            <img class="tb-btn" src="images/paint-icon.png" title="Click to snapshot and edit" onclick="startEdit()">
+            <img class="tb-btn" src="images/ruler-icon.png" title="Click to start measuring" onclick="measure()">
+        </div>
+        <div class="osgjs-info osgjs-info-dark">
+            <div id="meas"></div>
+        </div>
+    </div>
+    <div id="logo1" class="logo" style="visibility:hidden;">
+        <img id="logo1img" style="width:100%;height:100%;"/>
+    </div>
+    <div id="submitDlg" title="Submit/Download Image">
+        <p>
+        Please use the buttons below to submit and/or download the image.
+        By clicking 'Submit' you are confirming that this is your own work.</p>
+    </div>
+
+    <div id="painter">
+        <div class="row-fluid main-wrap">
+            <div class="span12 canvas-wrap">
+                <canvas id="canvas-background" class="canvas-paint canvas-background"></canvas>
+                <canvas class="canvas-paint canvas-negative"></canvas>
+                <canvas id="canvas-layer" class="canvas-paint canvas-layer"></canvas>
+                <canvas class="canvas-paint canvas-buffer"></canvas>
+                <canvas id="canvas-mouse" class="canvas-paint canvas-mouse"></canvas>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <img class="tb-btn" src="images/screenshot.png" title="Click to submit or download current image" onclick="$('#submitDlg').dialog('open')">
+            <img class="tb-btn" src="images/go-back-icon.png" title="Click to go back to 3D view" onclick="backTo3D()">
+        </div>
+        <div id="tool-wrap" class="tool-wrap">
+            <div class="tool">
+                <button class="shape active" title="Draw Lines" data-current-tool="Line" data-tool-panel="shape"></button>
+                <button class="stroke" title="Freeform" data-current-tool="Pen" data-tool-panel="stroke"></button>
+                <button class="eraser" title="Eraser" data-current-tool="Eraser" data-tool-panel="eraser"></button>
+                <button class="text" title="Text" data-tool-panel="text" data-current-tool="Text"></button>
+            </div>
+            <div class="tool-panel">
+                <div class="shape wrap">
+                    <button class="line" title="Line" data-tool="shape" data-tool-class="Line"></button>
+                    <button class="curve-closed" title="Closed curve" data-tool="shape" data-tool-class="CurveClosed"></button>
+                    <button class="rect" title="Rectangle" data-tool="shape" data-tool-class="Rect"></button>
+                    <button class="circle" title="Circle" data-tool="shape" data-tool-class="Circle"></button>
+                    <button class="ellipse" title="Ellipse" data-tool="shape" data-tool-class="Ellipse"></button>
+                </div>
+                <div class="stroke wrap">
+                    <button class="pen" title="Pen" data-tool="stroke" data-tool-class="Pen"> </button>
+                    <button class="curve-closed-stroke" title="Closed curve" data-tool="stroke" data-tool-class="CurveClosedStroke"></button>
+                    <button class="rect-stroke" title="Rectangle" data-tool="stroke" data-tool-class="RectStroke"> </button>
+                    <button class="circle-stroke" title="Circle" data-tool="stroke" data-tool-class="CircleStroke"></button>
+                    <button class="ellipse-stroke" title="Ellipse" data-tool="stroke" data-tool-class="EllipseStroke"></button>
+                </div>
+                <div class="eraser wrap">
+                </div>
+                <div class="text wrap">
+                    <button class="text" title="Text" data-tool="text" data-tool-class="Text"> </button>
+                    <button class="text-stroke" title="Stroked Text" data-tool="text" data-tool-class="TextStroke"> </button>
+                </div>
+            </div>
+        </div>
+        <footer />
+    </div>
+</body>
+</html>
+
